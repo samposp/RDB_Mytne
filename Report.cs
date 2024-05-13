@@ -50,7 +50,9 @@ namespace RDB_Mytne
                 $"Vlastník: {firma.nazev} ({firma.ico}){Environment.NewLine}" +
                 $"Hmotnost: {vozidlo.hmotnost.ToString("#")}{Environment.NewLine}" +
                 $"Emisní třída: {vozidlo.emisniTrida}{Environment.NewLine}" +
-                $"Typ vozidla: {vozidlo.typVozidla}{Environment.NewLine}";
+                $"Typ vozidla: {vozidlo.typVozidla}{Environment.NewLine}{Environment.NewLine}" +
+                $"Průjezdy bránami:{Environment.NewLine}";
+            report += mongoDb.GetReport(spz, from, to);
 
             tb_report.Text = report;
         }

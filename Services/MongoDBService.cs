@@ -46,17 +46,18 @@ namespace RDB_Mytne.Services
         }
         public string GetReport(string spz,  DateTime from, DateTime to)
         {
-            string report = "";
+            StringBuilder report = new();
             var filter = Builders<BsonDocument>.Filter.Gte(x => x["prujezd.datum_prujezdu"], from) &
                     Builders<BsonDocument>.Filter.Lte(x => x["prujezd.datum_prujezdu"], to) &
                     Builders<BsonDocument>.Filter.Eq(x => x["prujezd.registrace_vozidla.vozidlo.spz"], spz);
             var documents = mytneCollection.Find(filter);
             documents.ForEachAsync(document =>
             {
-                report += $"datum: {document["prujezd"]["datum_prujezdu"]}, vzdalenost: {document["prujezd"]["registrace_vozidla"]["ujete_km"]}\n";
+                report.AppendLine($"datum: {document["prujezd"]["datum_prujezdu"].ToLocalTime().ToShortDateString()}, " +
+                $"vzdalenost: {document["prujezd"]["registrace_vozidla"]["ujete_km"]} Km, " +
+                $"ID brány: {document["systemova_data"]["brana_id"]}\n");
             }).Wait();
-
-            return report;
+            return report.ToString();
         }
         public int  GetReportKm(string spz, DateTime from, DateTime to)
         {

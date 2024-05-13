@@ -106,8 +106,10 @@
             tb_report.Multiline = true;
             tb_report.Name = "tb_report";
             tb_report.ReadOnly = true;
-            tb_report.Size = new Size(351, 318);
+            tb_report.ScrollBars = ScrollBars.Vertical;
+            tb_report.Size = new Size(468, 318);
             tb_report.TabIndex = 8;
+            tb_report.WordWrap = false;
             // 
             // bt_close
             // 
@@ -123,7 +125,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(656, 371);
+            ClientSize = new Size(770, 388);
             Controls.Add(bt_close);
             Controls.Add(tb_report);
             Controls.Add(bt_createReport);
