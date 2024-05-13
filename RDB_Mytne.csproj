@@ -9,8 +9,23 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="MongoDB.Driver" Version="2.24.0" />
+		<PackageReference Include="Cake.Liquibase" Version="0.1.13" />
+		<PackageReference Include="Liquibase.Cli" Version="4.26.0" />
+		<PackageReference Include="MongoDB.Driver" Version="2.25.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
 	</ItemGroup>
+
+	<Target Name ="CopyLiquibase" AfterTargets="AfterBuild">
+		<ItemGroup>
+			<_CopyItems Include="liquibase/*.*">
+				<InProject>false</InProject>
+			</_CopyItems>
+		</ItemGroup>
+		<Copy
+		SourceFiles="@(_CopyItems)"
+		DestinationFolder="$(OutputPath)"
+        />
+	</Target>
 
 </Project>
